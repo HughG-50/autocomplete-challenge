@@ -1,9 +1,32 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 const Autocomplete = ({possibleSearchResults}) => {
+    
+    const [filteredSuggestions, setFilteredSuggestions] = useState([])
+    const [userInput, setUserInput] = useState("")
+
+    function onChange(e) {
+        setUserInput(e.currentTarget.value)
+
+        const filteredResults = possibleSearchResults.filter(
+            searchResult => searchResult.indexOf(userInput) > -1
+        )
+
+        setFilteredSuggestions(filteredResults)
+    }
+    
     return (
         <div>
-            Autocomplete Here
+            <input 
+                type="text"
+                onChange={onChange}
+            />
+
+            {filteredSuggestions.map((result, index) => (
+                <li key={`${result}-${index}`}>
+                    {result}
+                </li>
+            ))}
         </div>
     )
 }
