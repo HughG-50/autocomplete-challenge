@@ -9,7 +9,7 @@ const Autocomplete = ({possibleSearchResults}) => {
         setUserInput(e.currentTarget.value)
 
         const filteredResults = possibleSearchResults.filter(
-            searchResult => searchResult.indexOf(userInput) > -1
+            searchResult => searchResult.includes(userInput)
         )
 
         setFilteredSuggestions(filteredResults)
